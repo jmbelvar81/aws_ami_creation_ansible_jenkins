@@ -83,5 +83,5 @@ BSD
 Author Information
 ------------------
 
-Complete Name   : José M Beltrán Vargas
-Contact at Mail : jmbelvar81@outlook.com
+  - Complete Name   : José M Beltrán Vargas
+  - Contact at Mail : jmbelvar81@outlook.com
