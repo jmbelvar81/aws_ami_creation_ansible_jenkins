@@ -1,4 +1,4 @@
-Role *"BUILD_IBI_AWSAMI"*
+Role *"BUILD_AWS_AMI"*
 =========
 
 Role that include the required mechanism to create a test instance and build the AMI from it .
@@ -33,7 +33,7 @@ localhost ansible_host=127.0.0.1
 [aws_ec2_hosts:vars]
 ansible_port=22
 ansible_user=ec2-user
-ansible_private_key_file="key-pair-biaas.pem"
+ansible_private_key_file="key-pair-<your project>.pem"
 
 ```
 
@@ -84,4 +84,4 @@ Author Information
 ------------------
 
 Name          : José M Beltrán Vargas
-Contacat Mail : josemaria.beltran.contractor@bbva.com
+Contacat Mail : jmbelvar81@outlook.com

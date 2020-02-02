@@ -2,4 +2,4 @@
 - hosts: localhost
   remote_user: root
   roles:
-    - create_ibi_awsami
+    - create_aws_ami
