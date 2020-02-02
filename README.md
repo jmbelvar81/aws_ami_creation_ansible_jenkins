@@ -21,4 +21,4 @@ Currently is recommended pass the required extra vars as a json:
 ansible-playbook -i <your inventory path/file> <your_playbook> -e '{"key_a": <value_a>, .... , "key_z": <value_z>}'
 ```
 
-As alternative you could use a file using "@ your json file name" format
+As alternative you could use a file using *"@ your json file name"* format
