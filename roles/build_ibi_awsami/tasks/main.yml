@@ -1,0 +1,10 @@
+---
+# tasks file for build_ibi_awsami
+
+- name: 'Create Build AMI Actions'
+  include: create-build.yml
+  when: build_aws_ami_action == 'create'
+
+- name: 'Finalize Build AMI Actions'
+  include: finalize-build.yml
+  when: build_aws_ami_action == 'finalize'

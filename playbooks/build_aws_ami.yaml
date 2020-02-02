@@ -1,0 +1,56 @@
+---
+# Multiple Playbook for AMI BUILD PROCESS - Only  registered/"atuthorized" products
+#
+# Notes:
+#  - The actions on started EC2 Instance are using paramiko for connectiviy and they requires the key-pair (.pem) to allow the connectivity
+#
+
+- hosts: mylocalhost
+  connection: local
+
+  # This role:
+  #  - build the ami with the given parameters 
+  #  - Register in aws_ec2_hosts ansible inventory
+  #  - It's a phase common for "all products"
+  #  - The idea is pass vars using : vars: { <a var name>: "a value, that maybe could came from -e and be used as {{given var}}" }
+  #
+  roles:
+    - { role: build_aws_ami, vars: { aws_sec_group: "{{extra_sec_group}}",  aws_base_image: "{{extra_base_image}}" , aws_subnet_id: "{{extra_subnet_id}}" , aws_inst_type: "{{extra_inst_type}}" , aws_region: "{{extra_region}}", aws_inst_profile_name: "{{inst_profile_name}}", aws_inst_tags: "{{extra_tags}}", aws_key_name: "{{extra_key_name}}" }, build_aws_ami_action: create}
+  tags: 'create'
+
+# This playbook execute the role for the "indicated product" on the temporal instance
+# created previously.
+# Note: 
+#  - This is the "real dynamic part" where you choose the desired product role/roles to install
+#  - The roles used here has to be "as general as possible" to make easier reuse them in other 
+#    type of environments
+#
+- hosts: aws_ec2_hosts
+
+  tasks:
+    - debug:
+        msg: 'Include here the task to execute on the ec2 instance - i.e: Lines Commented at the end of this file'
+
+- hosts: mylocalhost
+  connection: local
+
+  roles:
+    - { role: build_aws_ami, vars: { aws_ami_des: "{{extra_ami_des}}", aws_ami_name: "{{extra_ami_name}}", aws_ami_region: "{{extra_ami_region}}", aws_ami_tags: "{{extra_ami_tags}}" }, build_aws_ami_action: finalize}
+  tags: 'finalize'
+
+
+## Example - Configure IBI WFS and WebClient
+#
+# - hosts: aws_ec2_hosts
+#   roles:
+#     - name: ibi_requirements
+#       tags: ibi_requirements
+
+#     - name: myjdkrole18
+#       tags: jdk18install
+
+#     - name: ibi_wfs_server
+#       tags: ibi_wfs_install
+
+#     - name: ibi_webclient
+#       tags: ibi_webclient_install

@@ -19,6 +19,12 @@ All notable changes to this project will be documented in this file.
   
   - The first version of this project is under current development
 
+## [0.0.0] - 2020-01-31
+
+    - Added all parameters required to uncoupled from the product used in the original code in:
+      - build_aws_ami playbook role parameters from *'extra vars'*
+      - create and finalize role parameters
+
 ## [0.0.0] - 2020-01-01
 
     - Remove old code and begin a new more generic implementation focus only in the AMI Creation

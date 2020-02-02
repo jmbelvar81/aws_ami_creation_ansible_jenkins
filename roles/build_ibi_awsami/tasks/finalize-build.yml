@@ -1,0 +1,42 @@
+# Tasks to Release the Temporal Instance and Create the AMI
+#
+
+---
+
+#- name: 'Debugging AMI TMP INSTANCE referenced'
+#  debug:
+#    msg: "The ami_tmp_instance content is: {{ ami_tmp_instance }}"
+
+# Notes about params:
+#  - tags : Pending of evaluate the format accepted - To change Key-Map for JSON [Original method doesn't support]
+#           Use the "aws_ami_tags parameter" to passing as required.
+#
+- name: Create new AMI from instance
+  local_action:
+    module: ec2_ami
+    aws_access_key: "{{ aws_access_key | default(omit) }}"
+    aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    description: "{{aws_ami_des}}"
+    instance_id: "{{ lookup('file', '/tmp/ami_tmp_instance.txt') }}" #"{{ item.id }}"
+    name: "{{aws_ami_name}}"
+    region: "{{aws_ami_region}}"
+    tags:
+      bi_tool: 'nonapply'
+      provider: 'ansible'
+    wait: yes
+  #with_items: "{{ ami_tmp_instance.instances }}"
+  register: ami_tmp
+
+# - name: 'Save reference to created AMI'
+#   set_fact:
+#     application_ami: "{{ ami_tmp.results[0] }}"
+
+- name: 'Delete Temp Instance Created to Build Desired AMI'
+  local_action:
+    module: ec2
+    aws_access_key: "{{ aws_access_key | default(omit) }}"
+    aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    instance_ids: "{{ lookup('file', '/tmp/ami_tmp_instance.txt') }}" #"{{ ami_tmp_instance.instance_ids[0] }}"
+    region: "{{aws_ami_region}}"
+    state: absent
+    wait: yes

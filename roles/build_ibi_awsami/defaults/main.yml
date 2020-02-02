@@ -1,0 +1,12 @@
+---
+# defaults file for build_ibi_awsami
+
+instance_name: 'AMI-IBI_v0.1'
+instance_type: 't2.xlarge'
+instance_role: 'biaas-tableau-role'    # When I can create roles we can launch using biaas-ibi-role or uniform to biaas-machine-role
+source_ami_id: 'ami-01e0935ec992d8ce5' # IES-GI-AWS-RHEL-7.6-20190402v2 - "SharedwithMe in AWS AMIs"
+kp_name: 'key-pair-biaas'
+sg_name: 'biaas-ibi-sg'
+subnets_prefix: "biaas-subnet"
+region: "eu-west-1"
+bi_provider: "ibi_webfocus"

@@ -1,0 +1,7 @@
+[thislocal_host]
+127.0.0.1 ansible_user=ec2-user ansible_become=yes
+
+[thislocal_host:vars]
+ansible_port=22
+ansible_user=ec2-user
+ansible_private_key_file="private_keys_ibi_build/key-pair-biaas.pem"

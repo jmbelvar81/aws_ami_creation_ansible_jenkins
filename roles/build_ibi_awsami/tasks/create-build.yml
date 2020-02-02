@@ -1,0 +1,50 @@
+# Required Tasks to Create Temporal Instance
+#
+
+
+# Notes about Params:
+#  - instance_tags: Requires a JSON - i.e: {"Name": "AMI Test for Quark Computing"}
+#  - vpc_subnet_id: Requires the AWS Format - i.e: subnet-0496b0005264924e8
+#  -
+#
+- name: 'Create Temporary Instance to create the AMI Building'
+  local_action:
+    module: ec2
+    aws_access_key: "{{ aws_access_key | default(omit) }}"
+    aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    count: 1
+    group: "{{aws_sec_group}}"
+    image: "{{aws_base_image}}"
+    instance_profile_name: "{{aws_inst_profile_name}}"
+    instance_type: "{{aws_inst_type}}"
+    key_name: "{{aws_key_name}}"
+    vpc_subnet_id: "{{aws_subnet_id}}"
+    instance_tags: "{{aws_inst_tags}}"
+    region: "{{aws_region}}"
+    state: present
+    wait: yes
+    wait_timeout: 300
+  register: ami_tmp_instance
+
+- name: 'Add Instance to the host group'
+  add_host:
+    name: "{{ item.private_ip }}"
+    groupname: 'aws_ec2_hosts'
+  with_items: "{{ ami_tmp_instance.instances }}"
+
+# Need security Group includes the machine that launch this part:
+# (In our case the SG from Jenkins-SSH-Only [sg-0cd9874ac51548058])
+- name: 'Wait for Temporal instance will be accessible'
+  wait_for:
+    host: "{{ item.private_ip }}"
+    port: 22
+    timeout: 300
+    state: started
+  with_items: "{{ ami_tmp_instance.instances }}"
+
+# Workaround because hostsvars and sharing register vars is faulty:
+#
+- name: 'Saving Temporal Instance ID in File - Usable in later stages'
+  copy:
+      dest: "/tmp/ami_tmp_instance.txt"
+      content: "{{ ami_tmp_instance.instance_ids[0] }}"
