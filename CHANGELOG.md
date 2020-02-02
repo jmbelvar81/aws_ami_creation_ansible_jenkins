@@ -29,11 +29,13 @@ All notable changes to this project will be documented in this file.
 
 ### Fixed
 
-   - Old commentaries from the base project this one is based   
+    - Old commentaries from the base project this one is based   
 
 ## [0.0.0] - 2020-01-01
 
-    - Remove old code and begin a new more generic implementation focus only in the AMI Creation
+### Removed
+
+    - Remove old code from the original project what originates the current one
 
 ## [0.0.0] - 2019-05-22
 
