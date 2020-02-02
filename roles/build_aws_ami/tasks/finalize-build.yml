@@ -8,8 +8,7 @@
 #    msg: "The ami_tmp_instance content is: {{ ami_tmp_instance }}"
 
 # Notes about params:
-#  - tags : Pending of evaluate the format accepted - To change Key-Map for JSON [Original method doesn't support]
-#           Use the "aws_ami_tags parameter" to passing as required.
+#  - tags : Included from the extra vars as "k-v" because limitations of ec2_ami
 #
 - name: Create new AMI from instance
   local_action:
@@ -21,8 +20,11 @@
     name: "{{aws_ami_name}}"
     region: "{{aws_ami_region}}"
     tags:
-      bi_tool: 'nonapply'
-      provider: 'ansible'
+      Name: "{{aws_ami_name}}"
+      project: "{{aws_ami_tags.project}}"
+      provisioner: 'ansible'
+      version: "{{aws_ami_tags.version}}"
+      environment: "{{aws_ami_tags.environment}}"
     wait: yes
   #with_items: "{{ ami_tmp_instance.instances }}"
   register: ami_tmp

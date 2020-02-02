@@ -11,4 +11,14 @@ The involved technologies are:
 	- Jenkins: As component that allow receive the requests from client and *"orchestrate"* the execution 
 	- Docker : As component to allow *isolate* all required dependencies and the execution code that Jenkins will invoke
 
+## How to Execute
 
+Currently is recommended pass the required extra vars as a json:
+
+```bash
+# Use --check to test previously to execution:
+#
+ansible-playbook -i <your inventory path/file> <your_playbook> -e '{"key_a": <value_a>, .... , "key_z": <value_z>}'
+```
+
+As alternative you could use a file usin "@<json file name>"

@@ -1,5 +1,5 @@
 ---
-# tasks file for build_ibi_awsami
+# tasks file for build_aws_ami
 
 - name: 'Create Build AMI Actions'
   include: create-build.yml
