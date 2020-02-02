@@ -57,7 +57,7 @@ The *test_build_ami.yml* will be as follow: - Consider that "hosts" field could 
   connection: local
 
   roles:
-    - { role: build_ibi_awsami, build_ibi_awsami_action: create }
+    - { role: build_aws_ami, vars: {<required params>} , build_aws_ami_action: create }
   tags: 'create'
 
 - hosts: aws_ec2_hosts                                           
@@ -70,7 +70,7 @@ The *test_build_ami.yml* will be as follow: - Consider that "hosts" field could 
   connection: local
 
   roles:
-    - { role: build_ibi_awsami, build_ibi_awsami_action: finalize }
+    - { role: build_aws_ami, vars: {<required params>}, build_aws_ami_action: finalize }
   tags: 'finalize'
 ```
 
