@@ -21,9 +21,15 @@ All notable changes to this project will be documented in this file.
 
 ## [0.0.0] - 2020-01-31
 
-    - Added all parameters required to uncoupled from the product used in the original code in:
-      - build_aws_ami playbook role parameters from *'extra vars'*
-      - create and finalize role parameters
+### Added 
+
+    - Global Parameters required to uncoupled from the product used in the original code and it's the base of this one. We added:
+      - Build_aws_ami playbook role parameters from *'extra vars'*
+      - Create and finalize role parameters
+
+### Fixed
+
+   - Old commentaries from the base project this one is based   
 
 ## [0.0.0] - 2020-01-01
 
