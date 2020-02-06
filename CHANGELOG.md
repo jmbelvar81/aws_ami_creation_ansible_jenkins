@@ -19,6 +19,38 @@ All notable changes to this project will be documented in this file.
   
   - The first version of this project is under current development
 
+## [0.0.1] - 2020-02-06
+
+### Added
+
+  - Public Ip as method to connect Temporal EC2 used by AMI
+  - Python3 in Finalize Task and required modifications
+  - Custom Credentials parameters for build workflow
+  - Methods to avoid Fingerprint confirmation in manual way
+  - Bundle of new requirements for used modules
+  - Entrypoint as replacement of CMD used during testing phase
+  - Examples of Execution and management in Documentation
+  - Jenkinsfile "Template" - Only Pending of include params and the references in the corresponding *stages*
+
+### Fixed
+
+  - Python 3 issues in Dockerfile
+  - Wrong Python2 in modules requiring Python3
+  - Parameters references
+  - Internal Role Vars in Finalize
+  - Entrypoint for Docker Container
+
+### Tested
+
+  - Creation of Temporal EC2 Instance Tasks
+  - Validation of Temporal Files with instance references on it
+  - Execution when existing AMI is found
+  - Execution without Python3 
+  - Test Role actions on Temporal EC2 Machine
+  - Execution using the new Entrypoint
+  - Execution of individual tasks "one by one" from common inventory
+  - Validation of Dynamic Host without include in physical inventory
+
 ## [0.0.0] - 2020-01-31
 
 ### Added 

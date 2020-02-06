@@ -58,7 +58,7 @@ node {
     stage('Configure SSH Client with Required Options'){
 
         sh """#!/bin/bash
-            sudo docker run --rm amitool:latest <include your playbook> <include your extra vars>
+            sudo docker run --rm -it amitool:latest -i inventories/create_ec2instanceforamibuild.yml build_aws_ami_workflow.yaml -e '{<pending of include the param to get the JSON File with Vars>}'
 
         """
 
