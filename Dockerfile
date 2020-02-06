@@ -3,7 +3,7 @@
 # Delete Image       : sudo docker rmi amitool:latest
 FROM alpine:latest
 
-RUN apk add gcc git libffi-dev musl-dev openssl-dev perl py-pip python python-dev sshpass mlocate
+RUN apk add gcc git libffi-dev musl-dev openssl-dev perl py-pip python python-dev sshpass mlocate openssh-client
 
 RUN apk update && updatedb
 
@@ -21,6 +21,8 @@ COPY ./roles/ /ansible/roles/
 
 COPY ./inventories/ /ansible/inventories/
 
+RUN chmod 400 /ansible/inventories/private_keys_ami_build/aw_ami_creator.pem
+
 COPY ./group_vars/ /amsible/group_vars/
 
 WORKDIR /ansible
@@ -32,6 +34,10 @@ RUN source ./tmpvirtv/bin/activate
 RUN pip install ansible
 
 RUN pip install boto
+
+RUN pip install botocore
+
+# RUN pip install boto3
 
 RUN pip install awscli
 

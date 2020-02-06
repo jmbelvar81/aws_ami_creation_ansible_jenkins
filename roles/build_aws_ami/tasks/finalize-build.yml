@@ -11,6 +11,8 @@
 #  - tags : Included from the extra vars as "k-v" because limitations of ec2_ami module
 #
 - name: Create new AMI from instance
+#  vars:
+#    ansible_python_interpreter: /usr/bin/python3    
   local_action:
     module: ec2_ami
     aws_access_key: "{{ custom_aws_access_key | default(omit) }}"
@@ -20,11 +22,11 @@
     name: "{{aws_ami_name}}"
     region: "{{aws_ami_region}}"
     tags:
-      Name: "{{aws_ami_name}}"
-      project: "{{aws_ami_tags.project}}"
+#      Name: "{{aws_ami_name}}"
+#      project: "{{aws_ami_tags.project}}"
       provisioner: 'ansible'
-      version: "{{aws_ami_tags.version}}"
-      environment: "{{aws_ami_tags.environment}}"
+#      version: "{{aws_ami_tags.version}}"
+#      environment: "{{aws_ami_tags.environment}}"
     wait: yes
   #with_items: "{{ ami_tmp_instance.instances }}"
   register: ami_tmp

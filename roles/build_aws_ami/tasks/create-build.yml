@@ -28,7 +28,8 @@
 
 - name: 'Add Instance to the host group'
   add_host:
-    name: "{{ item.private_ip }}"
+    #name: "{{ item.private_ip }}"
+    name: "{{item.public_ip}}"
     groupname: 'aws_ec2_hosts'
   with_items: "{{ ami_tmp_instance.instances }}"
 
@@ -36,9 +37,10 @@
 # (In our case the SG from Jenkins-SSH-Only [sg-0cd9874ac51548058])
 - name: 'Wait for Temporal instance will be accessible'
   wait_for:
-    host: "{{ item.private_ip }}"
+    # host: "{{ item.private_ip }}"
+    host: "{{item.public_ip}}"
     port: 22
-    timeout: 300
+    timeout: 400
     state: started
   with_items: "{{ ami_tmp_instance.instances }}"
 

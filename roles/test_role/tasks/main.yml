@@ -1,6 +1,12 @@
 ---
 # tasks file for test_role
 
+- name: 'Install cowsay - This is a simple role to test the AMI Creation'
+  become: true
+  yum:
+    name: cowsay
+    state: present
+
 - debug:
-    msg: 'The Test Role has been Executed - Use -vvv to show Extra Vars '
+    msg: 'The Test Role has been Executed - Try execute the cowsay in the machine/server'
 
