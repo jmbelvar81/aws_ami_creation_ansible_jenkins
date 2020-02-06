@@ -47,6 +47,6 @@ RUN pip3 install boto3
 
 WORKDIR /ansible/
 
-CMD echo "Delete this CMD after the tests"
+#CMD echo "Comment this CMD after the tests and Comment Out the ENTRYPOINT" 
 
-#ENTRYPOINT ["ansible-playbook"]
+ENTRYPOINT ["ansible-playbook"]
