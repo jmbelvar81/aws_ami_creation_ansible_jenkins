@@ -63,5 +63,5 @@
   connection: local
 
   roles:
-    - { role: build_aws_ami, vars: { aws_ami_des: "{{extra_ami_des}}", aws_ami_name: "{{extra_ami_name}}", aws_ami_region: "{{extra_region}}", aws_ami_tags: "{{extra_tags}}" }, build_aws_ami_action: finalize}
+    - { role: build_aws_ami, vars: { aws_ami_des: "{{extra_ami_des}}", aws_ami_name: "{{extra_ami_name}}", aws_ami_region: "{{extra_region}}", aws_ami_tags: "{{extra_tags}}", custom_aws_access_key: "{{extra_aws_access_key}}", custom_aws_secret_key: "{{extra_aws_secret_key}}"  }, build_aws_ami_action: finalize}
   tags: 'finalize'

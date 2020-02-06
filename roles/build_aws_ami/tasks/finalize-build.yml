@@ -11,8 +11,8 @@
 #  - tags : Included from the extra vars as "k-v" because limitations of ec2_ami module
 #
 - name: Create new AMI from instance
-#  vars:
-#    ansible_python_interpreter: /usr/bin/python3    
+  vars:
+    ansible_python_interpreter: /usr/bin/python3    
   local_action:
     module: ec2_ami
     aws_access_key: "{{ custom_aws_access_key | default(omit) }}"

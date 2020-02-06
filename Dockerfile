@@ -37,11 +37,13 @@ RUN pip install boto
 
 RUN pip install botocore
 
-# RUN pip install boto3
-
 RUN pip install awscli
 
-RUN pip install --upgrade awscli
+# RUN pip install --upgrade awscli
+
+RUN apk add python3 
+
+RUN pip3 install boto3
 
 WORKDIR /ansible/
 
