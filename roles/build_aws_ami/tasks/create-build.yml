@@ -5,13 +5,13 @@
 # Notes about Params:
 #  - instance_tags: Requires a JSON - i.e: {"Name": "AMI Test for Quark Computing"}
 #  - vpc_subnet_id: Requires the AWS Format - i.e: subnet-0496b0005264924e8
-#  -
+#  - <Pending of fill/document with detail>
 #
 - name: 'Create Temporary Instance to create the AMI Building'
   local_action:
     module: ec2
-    aws_access_key: "{{ aws_access_key | default(omit) }}"
-    aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    aws_access_key: "{{ custom_aws_access_key | default(omit) }}"
+    aws_secret_key: "{{ custom_aws_secret_key | default(omit) }}"
     count: 1
     group: "{{aws_sec_group}}"
     image: "{{aws_base_image}}"
@@ -23,7 +23,7 @@
     region: "{{aws_region}}"
     state: present
     wait: yes
-    wait_timeout: 300
+    wait_timeout: 500
   register: ami_tmp_instance
 
 - name: 'Add Instance to the host group'

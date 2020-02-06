@@ -15,6 +15,8 @@ RUN mkdir /ansible
 
 COPY ./playbooks/ /ansible/playbooks/
 
+RUN cp /ansible/playbooks/build_aws_ami_workflow.yaml /ansible/build_aws_ami_workflow.yaml
+
 COPY ./roles/ /ansible/roles/
 
 COPY ./inventories/ /ansible/inventories/
@@ -29,11 +31,13 @@ RUN source ./tmpvirtv/bin/activate
 
 RUN pip install ansible
 
+RUN pip install boto
+
 RUN pip install awscli
 
 RUN pip install --upgrade awscli
 
-WORKDIR /ansible/playbooks 
+WORKDIR /ansible/
 
 CMD echo "Delete this CMD after the tests"
 

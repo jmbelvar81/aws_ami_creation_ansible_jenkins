@@ -1,7 +1,12 @@
-[thislocal_host]
-127.0.0.1 ansible_user=ec2-user ansible_become=yes
+[mylocalhost]
+localhost
 
-[thislocal_host:vars]
+[aws_ec2_hosts]
+
+
+[aws_ec2_hosts:vars]
 ansible_port=22
 ansible_user=ec2-user
-ansible_private_key_file="private_keys_ami_build/your-key-pair-name-here.pem"
+ansible_become=yes
+ansible_ssh_private_key_file="/ansible/inventories/private_keys_ami_build/aw_ami_creator.pem"
+

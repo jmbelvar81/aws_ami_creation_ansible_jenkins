@@ -8,13 +8,13 @@
 #    msg: "The ami_tmp_instance content is: {{ ami_tmp_instance }}"
 
 # Notes about params:
-#  - tags : Included from the extra vars as "k-v" because limitations of ec2_ami
+#  - tags : Included from the extra vars as "k-v" because limitations of ec2_ami module
 #
 - name: Create new AMI from instance
   local_action:
     module: ec2_ami
-    aws_access_key: "{{ aws_access_key | default(omit) }}"
-    aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    aws_access_key: "{{ custom_aws_access_key | default(omit) }}"
+    aws_secret_key: "{{ custom_aws_secret_key | default(omit) }}"
     description: "{{aws_ami_des}}"
     instance_id: "{{ lookup('file', '/tmp/ami_tmp_instance.txt') }}" #"{{ item.id }}"
     name: "{{aws_ami_name}}"
@@ -36,8 +36,8 @@
 - name: 'Delete Temp Instance Created to Build Desired AMI'
   local_action:
     module: ec2
-    aws_access_key: "{{ aws_access_key | default(omit) }}"
-    aws_secret_key: "{{ aws_secret_key | default(omit) }}"
+    aws_access_key: "{{ custom_aws_access_key | default(omit) }}"
+    aws_secret_key: "{{ custom_aws_secret_key | default(omit) }}"
     instance_ids: "{{ lookup('file', '/tmp/ami_tmp_instance.txt') }}" #"{{ ami_tmp_instance.instance_ids[0] }}"
     region: "{{aws_ami_region}}"
     state: absent

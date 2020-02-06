@@ -5,8 +5,8 @@
 #  - The actions on started EC2 Instance are using paramiko for connectiviy and they requires the key-pair (.pem) to allow the connectivity
 #  - Expected "Extra Vars":
 #
-#     "{ extra_sec_group         : ,  
-#        extra_base_image        : , 
+#     "{ extra_sec_group         : ,  # Accepted an array of SGs
+#        extra_base_image        : ,
 #        extra_subnet_id         : ,
 #        extra_inst_type         : , 
 #        extra_region            : ,
@@ -17,7 +17,9 @@
 #        extra_ami_name          : ,
 #        extra_apply_role        : ,
 #      }"
-#       
+#
+#     Example in JSON: '{"extra_sec_group" : "ami_creator_test", extra_base_image: "ami-03caa3f860895f82e", "extra_subnet_id" : "subnet-a45136fc", "extra_inst_type"  : "t2.micro", "extra_region": "us-west-1", "extra_inst_profile_name" : "aws_ami_creator", "extra_tags": "{}","extra_key_name": "aw_ami_creator","extra_ami_des" : "An ami first test with new method", "extra_ami_name": "ami_new_mehtod_test", "extra_apply_role" : "test_role", "extra_aws_access_key" : "<include your access key>" , "extra_aws_secret_key" : "<include your key>"}'
+#      
 #  - For extra_apply_role use a string with the desired "role to invoke" when main ec2 instance is created
 #
 #  - For extra_tags currently are expected: 
@@ -31,7 +33,6 @@
 
 - hosts: mylocalhost
   connection: local
-
   # This role:
   #  - build the ami with the given parameters 
   #  - Register in aws_ec2_hosts ansible inventory
@@ -39,7 +40,7 @@
   #  - The idea is pass vars using : vars: { <a var name>: "a value, that maybe could came from -e and be used as {{given var}}" }
   #
   roles:
-    - { role: build_aws_ami, vars: { aws_sec_group: "{{extra_sec_group}}",  aws_base_image: "{{extra_base_image}}" , aws_subnet_id: "{{extra_subnet_id}}" , aws_inst_type: "{{extra_inst_type}}" , aws_region: "{{extra_region}}", aws_inst_profile_name: "{{extra_inst_profile_name}}", aws_inst_tags: "{{extra_tags}}", aws_key_name: "{{extra_key_name}}" }, build_aws_ami_action: create}
+    - { role: build_aws_ami, vars: { aws_sec_group: "{{extra_sec_group}}",  aws_base_image: "{{extra_base_image}}" , aws_subnet_id: "{{extra_subnet_id}}" , aws_inst_type: "{{extra_inst_type}}" , aws_region: "{{extra_region}}", aws_inst_profile_name: "{{extra_inst_profile_name}}", aws_inst_tags: "{{extra_tags}}", aws_key_name: "{{extra_key_name}}", custom_aws_access_key: "{{extra_aws_access_key}}", custom_aws_secret_key: "{{extra_aws_secret_key}}" }, build_aws_ami_action: create}
   tags: 'create'
 
 # This playbook execute the role for the "indicated product" on the temporal instance
