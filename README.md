@@ -7,9 +7,9 @@ This repository contains a software project to allow the creation of your AWS AM
 
 The involved technologies are:
 
-	- **Ansible** : As configuration management tool that allow install the required sofware in a declarative way 
-	- **Jenkins** : As component that allow receive the requests from client and *"orchestrate"* the execution 
-	- **Docker**  : As component to allow *isolate* all required dependencies and the execution code that Jenkins will invoke
+- **Ansible** : As configuration management tool that allow install the required sofware in a declarative way 
+- **Jenkins** : As component that allow receive the requests from client and *"orchestrate"* the execution 
+- **Docker**  : As component to allow *isolate* all required dependencies and the execution code that Jenkins will invoke
 
 ## How to Execute the Playbook without Docker
 
